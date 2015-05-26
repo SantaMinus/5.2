@@ -193,6 +193,8 @@ public class UI extends JPanel{
 				        c.from = Maths.nodes.get(Integer.parseInt(splitted[0])-1);
 				        c.to = Maths.nodes.get(Integer.parseInt(splitted[1])-1);
 				        c.weight=Integer.parseInt(splitted[2]);
+				        Maths.nodes.get(Integer.parseInt(splitted[0])-1).setNext(Maths.nodes.get(Integer.parseInt(splitted[1])-1));
+				        Maths.nodes.get(Integer.parseInt(splitted[1])-1).setPrev(Maths.nodes.get(Integer.parseInt(splitted[0])-1));
 				        
 				        Maths.advLinks.add(c);
 					}
