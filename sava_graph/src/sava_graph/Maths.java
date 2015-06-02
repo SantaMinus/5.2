@@ -111,10 +111,8 @@ public class Maths {
 					sorted2[i+1]=tmp;
 				}
 			}
-		//System.out.println("Sorted2 (id:weight):  ");
 		UI.text.setText(UI.text.getText()+"\nSorted2 (id:weight):  ");
 		for(int i=0; i<n; i++){
-			//System.out.print(sorted2[i].id+":"+sorted2[i].weight+"    ");
 			UI.text.setText(UI.text.getText()+"\n"+sorted2[i].id+":"+sorted2[i].weight+"    ");
 		}
 	}
@@ -127,7 +125,6 @@ public class Maths {
 		for(int i=0; i<n; i++){
 			nodes.get(i).countAdj();
 			sorted3[i]=nodes.get(i);
-			//System.out.println(sorted3[i].id+" adj="+sorted3[i].adjacency);
 		}
 		int [][]dist3;
 		int []path = new int[n];
@@ -155,10 +152,8 @@ public class Maths {
 				}
 			}
 		}
-		//System.out.println("\nSorted3 (id:adjacency:crit.path):  ");
 		UI.text.setText(UI.text.getText()+"\nSorted3 (id:adjacency:crit.path):  ");
 		for(int i=0; i<n; i++){
-			//System.out.print(sorted3[i].id+":"+sorted3[i].adjacency+":"+path[sorted3[i].id-1]+"   ");
 			UI.text.setText(UI.text.getText()+"\n"+sorted3[i].id+":"+sorted3[i].adjacency+":"+path[sorted3[i].id-1]+"   ");
 		}
 	}

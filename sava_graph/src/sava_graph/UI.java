@@ -35,6 +35,7 @@ public class UI extends JPanel{
 	static JButton sort2 = new JButton("sort2");
 	static JButton sort3 = new JButton("sort3");
 	static JButton sort4 = new JButton("sort4");
+	static JButton generate = new JButton("Generate graph");
 	static DefaultTableModel dtm, sdtm;
 	static JTextArea text = new JTextArea();
 	
@@ -64,6 +65,7 @@ public class UI extends JPanel{
 		menu.add(file);
 	    tb.add(finish);
 	    tb.add(cycle);
+	    tb.add(generate);
 	    menu.add(tb);
 	    
 	    file.add(save);
@@ -113,7 +115,6 @@ public class UI extends JPanel{
 	public static void setActions(){
 		save.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				//JOptionPane.showMessageDialog(UI.frame, "Saved");
 				java.io.PrintStream ps=null;
 				try {
 					ps = new java.io.PrintStream("/home/katia/Documents/5.2/pzks1.txt" );
@@ -148,7 +149,6 @@ public class UI extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				Maths.createMatrix();
 				for(int i=0; i<Maths.advLinks.size(); i++){
-					//System.out.println(Maths.advLinks.get(i).from.id+" --> "+Maths.advLinks.get(i).to.id+" : "+Maths.advLinks.get(i).weight);
 					text.setText(UI.text.getText()+"\n"+Maths.advLinks.get(i).from.id+" --> "+Maths.advLinks.get(i).to.id+" : "+Maths.advLinks.get(i).weight);
 				}
 				//add changing rows number dynamically
@@ -200,7 +200,6 @@ public class UI extends JPanel{
 					}
 					inFile.close();
 				}
-				//JOptionPane.showMessageDialog(UI.frame, "Loaded");
 				text.setText(text.getText()+"\nLoaded");
 			}
 	    });
@@ -239,6 +238,45 @@ public class UI extends JPanel{
 	    sort4.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
 				Maths.sort4();
+			}
+	    });
+	    
+	    generate.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				GraphGenerator.run();
+				String s=null;
+				File file=new File("/home/katia/Documents/5.2/pzks1_gen.txt");
+				if(file.exists()){
+					Scanner inFile=null;
+					try {
+						inFile = new Scanner(file);
+					} catch (FileNotFoundException e) {
+						e.printStackTrace();
+					}
+					
+					Maths.nodes.clear();
+					while(inFile.hasNext()){
+							s=inFile.nextLine();
+				        if(s.equals("link"))
+				        	break;
+				        String[] splitted = s.split("\\s+");
+				        Maths.nodes.add(new Node(Integer.parseInt(splitted[0]), Integer.parseInt(splitted[1])));
+				    }
+					while(inFile.hasNext()){
+						s=inFile.nextLine();
+				        String[] splitted = s.split("\\s+");
+				        Connection c = new Connection();
+				        c.from = Maths.nodes.get(Integer.parseInt(splitted[0])-1);
+				        c.to = Maths.nodes.get(Integer.parseInt(splitted[1])-1);
+				        c.weight=Integer.parseInt(splitted[2]);
+				        Maths.nodes.get(Integer.parseInt(splitted[0])-1).setNext(Maths.nodes.get(Integer.parseInt(splitted[1])-1));
+				        Maths.nodes.get(Integer.parseInt(splitted[1])-1).setPrev(Maths.nodes.get(Integer.parseInt(splitted[0])-1));
+				        
+				        Maths.advLinks.add(c);
+					}
+					inFile.close();
+					text.setText(text.getText()+"\nGraph generated");
+				}
 			}
 	    });
 	}

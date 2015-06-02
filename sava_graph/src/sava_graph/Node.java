@@ -13,7 +13,7 @@ import javax.swing.*;
 @SuppressWarnings("serial")
 public class Node extends JPanel implements MouseMotionListener,MouseListener{
 	
-	int radius=50, id, weight, adjacency=0, critTimePath=0;
+	int radius=50, id, weight, adjacency=0, critTimePath=0, ET=0, LT=0;
 	ArrayList<Node> prev = new ArrayList<Node>();
 	ArrayList<Node> next = new ArrayList<Node>();
 	
@@ -89,5 +89,13 @@ public class Node extends JPanel implements MouseMotionListener,MouseListener{
 	
 	public void setCritPath(int x){
 		this.critTimePath+=weight+x;
+	}
+	
+	public void setET(int t){
+		this.ET=t;
+	}
+	
+	public void setLT(int t){
+		this.LT+=t;
 	}
 }
