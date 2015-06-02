@@ -4,4 +4,4 @@ This is a repo for year 5 semester 2 labworks. Here you can see:
 	sort2 - decrease of task weight
 	sort3 - adjacency decrease and, if the adjacency of two tasks is the same, the increase of critical path (by length)
 	sort4 - decrease of critical path by time
-	The generator (lab 5) creates a graph using parameters: number of nodes, minimal node weight, maximal node weight, corellation, min link weight and max linkweight.
+	The generator (lab 5) creates a graph using parameters: number of nodes, minimal node weight, maximal node weight, correlation, min link weight and max link weight.
