@@ -7,11 +7,11 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.*;
 
 @SuppressWarnings("serial")
-public class DrawingPane extends JPanel implements MouseListener,MouseMotionListener{
+public class DrawingPane extends JPanel implements MouseListener, MouseMotionListener{
 	
-	boolean connectionMode=false;
+	boolean connectionMode = false;
 	Connection temp=new Connection();
-	int id=1;
+	int id = 1;
 	
 	DrawingPane(){
 		this.addMouseListener(this);			
@@ -49,14 +49,14 @@ public class DrawingPane extends JPanel implements MouseListener,MouseMotionList
 	                    null,
 	                    null,
 	                    "1");
-				temp.weight=Integer.parseInt(w);
+				temp.weight = Integer.parseInt(w);
 				temp.to = d;			// set end node of connection to node clicked
-				Maths.nodes.get(temp.to.id-1).setPrev(temp.from);
-				Maths.nodes.get(temp.from.id-1).setNext(temp.to);
-				temp.setBounds(0,0, 1000, 1000);
+				Maths.nodes.get(temp.to.id - 1).setPrev(temp.from);
+				Maths.nodes.get(temp.from.id - 1).setNext(temp.to);
+				temp.setBounds(0, 0, 1000, 1000);
 				Maths.advLinks.add(temp);
 			}
-			connectionMode=!connectionMode;// switch modes =)) do not like it but... but...
+			connectionMode=!connectionMode;// switch modes 
 		}
 	}
 
@@ -70,7 +70,6 @@ public class DrawingPane extends JPanel implements MouseListener,MouseMotionList
 	}
 
 	//here i tried to make one end of line follow the mouse in connection mode but i failed.
-	//if you want to do some then here is the place xD
 	public void mouseMoved(MouseEvent arg0) {
 		//System.out.println(arg0.getSource());
 		if(connectionMode){

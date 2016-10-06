@@ -178,16 +178,7 @@ public class UI extends JPanel {
 						e.printStackTrace();
 					}
 					
-					Maths.nodes.clear();
-					while(inFile.hasNext()){
- 						s = inFile.nextLine();
-				        if(s.equals("link"))
-				        	break;
-				        String[] splitted = s.split("\\s+");
-				        Maths.nodes.add(new Node(Integer.parseInt(splitted[0]), Integer.parseInt(splitted[1])));
-				    }
-					
-					setConnection(inFile);
+					setConnections(inFile);
 					
 					inFile.close();
 				}
@@ -245,16 +236,9 @@ public class UI extends JPanel {
 						e.printStackTrace();
 					}
 					
-					Maths.nodes.clear();
-					while(inFile.hasNext()){
-							s = inFile.nextLine();
-				        if(s.equals("link"))
-				        	break;
-				        String[] splitted = s.split("\\s+");
-				        Maths.nodes.add(new Node(Integer.parseInt(splitted[0]), Integer.parseInt(splitted[1])));
-				    }
 					
-					setConnection(inFile);
+					
+					setConnections(inFile);
 					
 					inFile.close();
 					text.setText(text.getText() + "\nGraph generated");
@@ -263,8 +247,17 @@ public class UI extends JPanel {
 	    });
 	}
 	
-	public static void setConnection(Scanner inFile){
+	public static void setConnections(Scanner inFile){
 		String s = null;
+		Maths.nodes.clear();
+		while(inFile.hasNext()){
+				s = inFile.nextLine();
+	        if(s.equals("link"))
+	        	break;
+	        String[] splitted = s.split("\\s+");
+	        Maths.nodes.add(new Node(Integer.parseInt(splitted[0]), Integer.parseInt(splitted[1])));
+	    }
+		
 		while(inFile.hasNext()){
 			s = inFile.nextLine();
 	        String[] splitted = s.split("\\s+");
