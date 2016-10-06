@@ -7,7 +7,7 @@ public class Unit {
 	ArrayList<Unit> neighbours = new ArrayList<Unit>();
 	
 	public Unit(int id){
-		this.id=id;
+		this.id = id;
 	}
 	
 	public void addNeighbour(Unit u){

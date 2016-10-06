@@ -42,9 +42,9 @@ public class Solution {
         //запускаем обход из всех вершин, смежных с вершиной v
         int w;
         for (int i = 0; i < Maths.matrix.length; ++i) { 
-            if(Maths.matrix[v][i]!=0) {
+            if(Maths.matrix[v][i] != 0) {
             	//w = Maths.matrix[v][i];
-            	w=i;
+            	w = i;
             	prev[w] = v; 			//вершина v - это предок вершины w при обходе
             	dfsCycle(w); 			//вызов обхода от вершины w, смежной с вершиной v
             }
@@ -56,7 +56,7 @@ public class Solution {
     }
     
     private void readData() throws IOException {
-    	n=Maths.matrix.length;	//number of nodes
+    	n = Maths.matrix.length;	//number of nodes
     	//mark nodes as white
         color = new int[n];
         Arrays.fill(color, 0);
@@ -70,11 +70,11 @@ public class Solution {
    
     private void printData() throws IOException {
         if (cyclic) {
-        	String s="";
+        	String s = "";
             for (int i = 0; i < cycle.size(); ++i) {
-            	s+=(cycle.get(i)+1)+" ";
+            	s += (cycle.get(i) + 1) + " ";
             }
-        	JOptionPane.showMessageDialog(UI.frame, "Graph has cycle: "+s, "ERROR", JOptionPane.ERROR_MESSAGE);
+        	JOptionPane.showMessageDialog(UI.frame, "Graph has cycle: " + s, "ERROR", JOptionPane.ERROR_MESSAGE);
         	System.exit(0);
         } else {
         	JOptionPane.showMessageDialog(UI.frame, "Graph is acyclic");

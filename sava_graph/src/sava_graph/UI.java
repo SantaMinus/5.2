@@ -11,10 +11,10 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 @SuppressWarnings("serial")
-public class UI extends JPanel{
+public class UI extends JPanel {
     final static int maxGap = 20;
     static GridLayout layout = new GridLayout(0,1);
-    static JMenuBar menu=new JMenuBar();
+    static JMenuBar menu = new JMenuBar();
     static JTabbedPane tabbedPane = new JTabbedPane();
     static JComponent panel = new JPanel(false), panel2 = new JPanel(false);
     public static int x;
@@ -40,7 +40,7 @@ public class UI extends JPanel{
 	static JTextArea text = new JTextArea();
 	
 	static void paintUI() {
-		Dimension dim = new Dimension(580,580);
+		Dimension dim = new Dimension(580, 580);
 	    
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    
@@ -60,7 +60,7 @@ public class UI extends JPanel{
 	}
 	
 	protected static void makeMenu() {
-		JMenu file=new JMenu("File");
+		JMenu file = new JMenu("File");
 		JToolBar tb = new JToolBar();
 		menu.add(file);
 	    tb.add(finish);
@@ -77,15 +77,15 @@ public class UI extends JPanel{
 	    setActions();
 	}
 	
-	public static void createTable(){
+	public static void createTable() {
 		String[] columnNames = {"1", "2", "3", "4", "5"};
-		Object[][] data = {{0,0,0,0,0}, {0,0,0,0,0}, {0,0,0,0,0}, {0,0,0,0,0}, {0,0,0,0,0}};
+		Object[][] data = { {0,0,0,0,0}, {0,0,0,0,0}, {0,0,0,0,0}, {0,0,0,0,0}, {0,0,0,0,0} };
 		dtm = new DefaultTableModel(data, columnNames);
 		sdtm = new DefaultTableModel(data, columnNames);
 		table = new JTable(dtm);
 		scrollPane = new JScrollPane(table);
 		table.setFillsViewportHeight(true);
-		JPanel p=new JPanel();
+		JPanel p = new JPanel();
 		//p.setLayout(new BorderLayout());
 		p.setLayout(new BoxLayout(p, BoxLayout.PAGE_AXIS));
 		JLabel separator0 = new JLabel("Task graph matrix");
@@ -108,29 +108,29 @@ public class UI extends JPanel{
 		tb.add(sort4);
 		p.add(tb);
 		p.add(text);
-		split.setBottomComponent(p);     //хз на счет контент пейна, лучше его гдето раньше сделать. сам сплитпейн. и добавить две панели
+		split.setBottomComponent(p);		// i think you should rename it ;)
 		frame.add(split);
 	}
 	
-	public static void setActions(){
-		save.addActionListener(new ActionListener(){
+	public static void setActions() {
+		save.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				java.io.PrintStream ps=null;
+				java.io.PrintStream ps = null;
 				try {
-					ps = new java.io.PrintStream("/home/katerynasavina/Documents/java/5.2/pzks1.txt" );
+					ps = new java.io.PrintStream("/home/katerynasavina/Documents/java/5.2/pzks1.txt");
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
 				}
-				for(int i=0; i<Maths.nodes.size(); i++){
-						ps.println(Maths.nodes.get(i).id+" "+Maths.nodes.get(i).weight);
+				for(int i = 0; i < Maths.nodes.size(); i++){
+						ps.println(Maths.nodes.get(i).id + " " + Maths.nodes.get(i).weight);
 				}
 				ps.println("link");
-				for(int i=0; i<Maths.advLinks.size(); i++){
-					ps.print(Maths.advLinks.get(i).from.id+" "+Maths.advLinks.get(i).to.id+" "+Maths.advLinks.get(i).weight);
+				for(int i = 0; i < Maths.advLinks.size(); i++){
+					ps.print(Maths.advLinks.get(i).from.id + " " + Maths.advLinks.get(i).to.id + " " + Maths.advLinks.get(i).weight);
 					ps.println();
 				}
 		        ps.close();
-		        text.setText(UI.text.getText()+"\nSaved");
+		        text.setText(UI.text.getText() + "\nSaved");
 			}
 	    });
 	    
@@ -148,12 +148,12 @@ public class UI extends JPanel{
 	    finish.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				Maths.createMatrix();
-				for(int i=0; i<Maths.advLinks.size(); i++){
-					text.setText(UI.text.getText()+"\n"+Maths.advLinks.get(i).from.id+" --> "+Maths.advLinks.get(i).to.id+" : "+Maths.advLinks.get(i).weight);
+				for(int i = 0; i < Maths.advLinks.size(); i++){
+					text.setText(UI.text.getText() + "\n" + Maths.advLinks.get(i).from.id + " --> " + Maths.advLinks.get(i).to.id + " : " + Maths.advLinks.get(i).weight);
 				}
 				//add changing rows number dynamically
-				for(int i=0; i<Maths.matrix.length; i++){
-					for(int j=0; j<Maths.matrix.length; j++){
+				for(int i = 0; i < Maths.matrix.length; i++){
+					for(int j = 0; j < Maths.matrix.length; j++){
 						table.setValueAt(Maths.matrix[i][j], i, j);
 					}
 				}
@@ -168,10 +168,10 @@ public class UI extends JPanel{
 	    
 	    load.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				String s=null;
-				File file=new File("/home/katerynasavina/Documents/java/5.2/pzks1.txt");
-				if(file.exists()){
-					Scanner inFile=null;
+				String s = null;
+				File file = new File("/home/katerynasavina/Documents/java/5.2/pzks1.txt");
+				if(file.exists()) {
+					Scanner inFile = null;
 					try {
 						inFile = new Scanner(file);
 					} catch (FileNotFoundException e) {
@@ -180,7 +180,7 @@ public class UI extends JPanel{
 					
 					Maths.nodes.clear();
 					while(inFile.hasNext()){
- 						s=inFile.nextLine();
+ 						s = inFile.nextLine();
 				        if(s.equals("link"))
 				        	break;
 				        String[] splitted = s.split("\\s+");
@@ -191,7 +191,7 @@ public class UI extends JPanel{
 					
 					inFile.close();
 				}
-				text.setText(text.getText()+"\nLoaded");
+				text.setText(text.getText() + "\nLoaded");
 			}
 	    });
 	    
@@ -204,7 +204,7 @@ public class UI extends JPanel{
 	    
 	    addRow.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				
+				//add some code
 			}
 	    });
 	    
@@ -235,10 +235,10 @@ public class UI extends JPanel{
 	    generate.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
 				GraphGenerator.run();
-				String s=null;
-				File file=new File("/home/katerynasavina/Documents/java/5.2/pzks1.txt");
+				String s = null;
+				File file = new File("/home/katerynasavina/Documents/java/5.2/pzks1.txt");
 				if(file.exists()){
-					Scanner inFile=null;
+					Scanner inFile = null;
 					try {
 						inFile = new Scanner(file);
 					} catch (FileNotFoundException e) {
@@ -247,7 +247,7 @@ public class UI extends JPanel{
 					
 					Maths.nodes.clear();
 					while(inFile.hasNext()){
-							s=inFile.nextLine();
+							s = inFile.nextLine();
 				        if(s.equals("link"))
 				        	break;
 				        String[] splitted = s.split("\\s+");
@@ -257,21 +257,21 @@ public class UI extends JPanel{
 					setConnection(inFile);
 					
 					inFile.close();
-					text.setText(text.getText()+"\nGraph generated");
+					text.setText(text.getText() + "\nGraph generated");
 				}
 			}
 	    });
 	}
 	
 	public static void setConnection(Scanner inFile){
-		String s=null;
+		String s = null;
 		while(inFile.hasNext()){
-			s=inFile.nextLine();
+			s = inFile.nextLine();
 	        String[] splitted = s.split("\\s+");
 	        Connection c = new Connection();
-	        c.from = Maths.nodes.get(Integer.parseInt(splitted[0])-1);
-	        c.to = Maths.nodes.get(Integer.parseInt(splitted[1])-1);
-	        c.weight=Integer.parseInt(splitted[2]);
+	        c.from = Maths.nodes.get(Integer.parseInt(splitted[0]) - 1);
+	        c.to = Maths.nodes.get(Integer.parseInt(splitted[1]) - 1);
+	        c.weight = Integer.parseInt(splitted[2]);
 	        Maths.nodes.get(Integer.parseInt(splitted[0])-1).setNext(Maths.nodes.get(Integer.parseInt(splitted[1])-1));
 	        Maths.nodes.get(Integer.parseInt(splitted[1])-1).setPrev(Maths.nodes.get(Integer.parseInt(splitted[0])-1));
 	        
