@@ -117,7 +117,7 @@ public class UI extends JPanel{
 			public void actionPerformed(ActionEvent arg0) {
 				java.io.PrintStream ps=null;
 				try {
-					ps = new java.io.PrintStream("/home/katia/Documents/5.2/pzks1.txt" );
+					ps = new java.io.PrintStream("/home/katerynasavina/Documents/java/5.2/pzks1.txt" );
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
 				}
@@ -169,7 +169,7 @@ public class UI extends JPanel{
 	    load.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
 				String s=null;
-				File file=new File("/home/katia/Documents/5.2/pzks1.txt");
+				File file=new File("/home/katerynasavina/Documents/java/5.2/pzks1.txt");
 				if(file.exists()){
 					Scanner inFile=null;
 					try {
@@ -186,18 +186,9 @@ public class UI extends JPanel{
 				        String[] splitted = s.split("\\s+");
 				        Maths.nodes.add(new Node(Integer.parseInt(splitted[0]), Integer.parseInt(splitted[1])));
 				    }
-					while(inFile.hasNext()){
-						s=inFile.nextLine();
-				        String[] splitted = s.split("\\s+");
-				        Connection c = new Connection();
-				        c.from = Maths.nodes.get(Integer.parseInt(splitted[0])-1);
-				        c.to = Maths.nodes.get(Integer.parseInt(splitted[1])-1);
-				        c.weight=Integer.parseInt(splitted[2]);
-				        Maths.nodes.get(Integer.parseInt(splitted[0])-1).setNext(Maths.nodes.get(Integer.parseInt(splitted[1])-1));
-				        Maths.nodes.get(Integer.parseInt(splitted[1])-1).setPrev(Maths.nodes.get(Integer.parseInt(splitted[0])-1));
-				        
-				        Maths.advLinks.add(c);
-					}
+					
+					setConnection(inFile);
+					
 					inFile.close();
 				}
 				text.setText(text.getText()+"\nLoaded");
@@ -245,7 +236,7 @@ public class UI extends JPanel{
 			public void actionPerformed(ActionEvent arg0) {
 				GraphGenerator.run();
 				String s=null;
-				File file=new File("/home/katia/Documents/5.2/pzks1_gen.txt");
+				File file=new File("/home/katerynasavina/Documents/java/5.2/pzks1.txt");
 				if(file.exists()){
 					Scanner inFile=null;
 					try {
@@ -262,22 +253,29 @@ public class UI extends JPanel{
 				        String[] splitted = s.split("\\s+");
 				        Maths.nodes.add(new Node(Integer.parseInt(splitted[0]), Integer.parseInt(splitted[1])));
 				    }
-					while(inFile.hasNext()){
-						s=inFile.nextLine();
-				        String[] splitted = s.split("\\s+");
-				        Connection c = new Connection();
-				        c.from = Maths.nodes.get(Integer.parseInt(splitted[0])-1);
-				        c.to = Maths.nodes.get(Integer.parseInt(splitted[1])-1);
-				        c.weight=Integer.parseInt(splitted[2]);
-				        Maths.nodes.get(Integer.parseInt(splitted[0])-1).setNext(Maths.nodes.get(Integer.parseInt(splitted[1])-1));
-				        Maths.nodes.get(Integer.parseInt(splitted[1])-1).setPrev(Maths.nodes.get(Integer.parseInt(splitted[0])-1));
-				        
-				        Maths.advLinks.add(c);
-					}
+					
+					setConnection(inFile);
+					
 					inFile.close();
 					text.setText(text.getText()+"\nGraph generated");
 				}
 			}
 	    });
+	}
+	
+	public static void setConnection(Scanner inFile){
+		String s=null;
+		while(inFile.hasNext()){
+			s=inFile.nextLine();
+	        String[] splitted = s.split("\\s+");
+	        Connection c = new Connection();
+	        c.from = Maths.nodes.get(Integer.parseInt(splitted[0])-1);
+	        c.to = Maths.nodes.get(Integer.parseInt(splitted[1])-1);
+	        c.weight=Integer.parseInt(splitted[2]);
+	        Maths.nodes.get(Integer.parseInt(splitted[0])-1).setNext(Maths.nodes.get(Integer.parseInt(splitted[1])-1));
+	        Maths.nodes.get(Integer.parseInt(splitted[1])-1).setPrev(Maths.nodes.get(Integer.parseInt(splitted[0])-1));
+	        
+	        Maths.advLinks.add(c);
+		}
 	}
 }

@@ -39,7 +39,7 @@ public class GraphGenerator {
 		String s=g.generate(5, 1, 3, 0.5, 1, 3);
 		java.io.PrintStream ps=null;
 		try {
-			ps = new java.io.PrintStream("/home/katia/Documents/5.2/pzks1_gen.txt");
+			ps = new java.io.PrintStream("/home/katerynasavina/Documents/java/5.2/pzks1_gen.txt");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
