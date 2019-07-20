@@ -7,26 +7,26 @@ import java.util.Arrays;
 import javax.swing.JOptionPane;
 
 public class Solution {
-    
-    private int n; 			//количество вершин в орграфе
-    private int color[]; 			 	//массив для хранения цветов вершин
-    private int prev[];				    //массив предков, необходимых для восстановления цикла, в случае его наличия в графе
-    private boolean cyclic = false; 	//флаг, показывающий содержит орграф цикл или нет
-    ArrayList<Integer> cycle; 			//цикл
-    
+
+    private int n;            //количество вершин в орграфе
+    private int color[];                //массив для хранения цветов вершин
+    private int prev[];                    //массив предков, необходимых для восстановления цикла, в случае его наличия в графе
+    private boolean cyclic = false;    //флаг, показывающий содержит орграф цикл или нет
+    ArrayList<Integer> cycle;            //цикл
+
     //процедура обхода в глубину
-    private void dfsCycle(int v) { 
+    private void dfsCycle(int v) {
         //if node is black
-        if (color[v] == 2) { 
+        if (color[v] == 2) {
             return;
         }
-        if (cyclic) { 
+        if (cyclic) {
             return;
         }
         //if node is grey it means graph is cyclic
-        if (color[v] == 1) { 
+        if (color[v] == 1) {
             cyclic = true;
-            cycle.add(v);		//save cycle 
+            cycle.add(v);        //save cycle
             for (int ver = prev[v]; ver != v; ver = prev[ver]) {
                 cycle.add(ver);
             }
@@ -38,49 +38,49 @@ public class Solution {
             }
             return;
         }
-        color[v] = 1;		//mark node grey
+        color[v] = 1;        //mark node grey
         //запускаем обход из всех вершин, смежных с вершиной v
         int w;
-        for (int i = 0; i < Maths.matrix.length; ++i) { 
-            if(Maths.matrix[v][i] != 0) {
-            	//w = Maths.matrix[v][i];
-            	w = i;
-            	prev[w] = v; 			//вершина v - это предок вершины w при обходе
-            	dfsCycle(w); 			//вызов обхода от вершины w, смежной с вершиной v
+        for (int i = 0; i < Maths.matrix.length; ++i) {
+            if (Maths.matrix[v][i] != 0) {
+                //w = Maths.matrix[v][i];
+                w = i;
+                prev[w] = v;            //вершина v - это предок вершины w при обходе
+                dfsCycle(w);            //вызов обхода от вершины w, смежной с вершиной v
             }
             if (cyclic) {
                 return;
             }
         }
-        color[v] = 2; 		//mark black
+        color[v] = 2;        //mark black
     }
-    
-    private void readData() throws IOException {
-    	n = Maths.matrix.length;	//number of nodes
-    	//mark nodes as white
+
+    private void readData() {
+        n = Maths.matrix.length;    //number of nodes
+        //mark nodes as white
         color = new int[n];
         Arrays.fill(color, 0);
         //ancestors array
         prev = new int[n];
         Arrays.fill(prev, -1);
-        
+
         cyclic = false;
-        cycle = new ArrayList<Integer>();
+        cycle = new ArrayList<>();
     }
-   
-    private void printData() throws IOException {
+
+    private void printData() {
         if (cyclic) {
-        	String s = "";
+            String s = "";
             for (int i = 0; i < cycle.size(); ++i) {
-            	s += (cycle.get(i) + 1) + " ";
+                s += (cycle.get(i) + 1) + " ";
             }
-        	JOptionPane.showMessageDialog(UI.frame, "Graph has cycle: " + s, "ERROR", JOptionPane.ERROR_MESSAGE);
-        	System.exit(0);
+            JOptionPane.showMessageDialog(UI.frame, "Graph has cycle: " + s, "ERROR", JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
         } else {
-        	JOptionPane.showMessageDialog(UI.frame, "Graph is acyclic");
+            JOptionPane.showMessageDialog(UI.frame, "Graph is acyclic");
         }
     }
-    
+
     void run() throws IOException {
         readData();
         for (int v = 0; v < n; ++v) {

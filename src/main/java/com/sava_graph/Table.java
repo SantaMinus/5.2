@@ -8,19 +8,23 @@ import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
 @SuppressWarnings("serial")
-class Table  extends AbstractTableModel{
-	boolean DEBUG=false;
-	String[] columnNames = {"1", "2", "3", "4", "5"};
-	Object[][] data = {{0,0,0,0,0}, {0,0,0,0,0}, {0,0,0,0,0}, {0,0,0,0,0}, {0,0,0,0,0}};
-	
-    public Table(){
+class Table extends AbstractTableModel {
+    boolean DEBUG = false;
+    String[] columnNames = {"1", "2", "3", "4", "5"};
+    Object[][] data = {
+            {0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0}};
+
+    public Table() {
         final JTable table = new JTable(data, columnNames);
         table.setPreferredScrollableViewportSize(new Dimension(500, 70));
         table.setFillsViewportHeight(true);
         JScrollPane scrollPane = new JScrollPane(table);
         JPanel panel = new JPanel();
         panel.add(scrollPane);
-        
     }
 
     public int getColumnCount() {
@@ -38,12 +42,12 @@ class Table  extends AbstractTableModel{
     public Object getValueAt(int row, int col) {
         return data[row][col];
     }
-    
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-	public Class getColumnClass(int c) {
+
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    public Class getColumnClass(int c) {
         return getValueAt(0, c).getClass();
     }
-    
+
     public boolean isCellEditable(int row, int col) {
         //Note that the data/cell address is constant,
         //no matter where the cell appears onscreen.
@@ -53,13 +57,13 @@ class Table  extends AbstractTableModel{
             return true;
         }
     }
-    
+
     public void setValueAt(Object value, int row, int col) {
         if (DEBUG) {
             System.out.println("Setting value at " + row + "," + col
-                               + " to " + value
-                               + " (an instance of "
-                               + value.getClass() + ")");
+                    + " to " + value
+                    + " (an instance of "
+                    + value.getClass() + ")");
         }
 
         data[row][col] = value;
@@ -70,7 +74,7 @@ class Table  extends AbstractTableModel{
             printDebugData();
         }
     }
-    
+
     private void printDebugData() {
         int numRows = getRowCount();
         int numCols = getColumnCount();
