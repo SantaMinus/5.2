@@ -1,20 +1,30 @@
 package com.sava_graph;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Unit {
-    int id;
-    ArrayList<Unit> neighbours = new ArrayList<>();
+    private int id;
+    private List<Unit> neighbours;
 
-    public Unit(int id) {
+    Unit(int id) {
         this.id = id;
+        this.neighbours = new ArrayList<>();
     }
 
-    public void addNeighbour(Unit u) {
+    void addNeighbour(Unit u) {
         neighbours.add(u);
     }
 
-    public void markNeighbours() {
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public List<Unit> getNeighbours() {
+        return neighbours;
     }
 }
